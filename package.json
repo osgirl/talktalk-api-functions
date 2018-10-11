@@ -1,0 +1,24 @@
+{
+  "name": "talktalk-api-functions",
+  "version": "1.0.0",
+  "description": "Api endpoints exposed via azure functions",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/talktalkplc/talktalk-api-functions.git"
+  },
+  "keywords": [
+    "azure",
+    "api",
+    "functions"
+  ],
+  "author": "Jose Rodrigues",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/talktalkplc/talktalk-api-functions/issues"
+  },
+  "homepage": "https://github.com/talktalkplc/talktalk-api-functions#readme"
+}
