@@ -20,5 +20,9 @@
   "bugs": {
     "url": "https://github.com/talktalkplc/talktalk-api-functions/issues"
   },
-  "homepage": "https://github.com/talktalkplc/talktalk-api-functions#readme"
+  "homepage": "https://github.com/talktalkplc/talktalk-api-functions#readme",
+  "dependencies": {
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2"
+  }
 }
