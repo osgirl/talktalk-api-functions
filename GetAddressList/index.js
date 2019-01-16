@@ -1,16 +1,42 @@
-module.exports = async function (context, req) {
-    context.log('JavaScript HTTP trigger function processed a request.');
+module.exports = function (context, req) {
+    const rp = require('request-promise-native').defaults({jar: true});
+context.log(process.env);    
+    var packageCode = context.bindingData.packageCode;
 
-    if (req.query.name || (req.body && req.body.name)) {
-        context.res = {
-            // status: 200, /* Defaults to 200 */
-            body: "Hello " + (req.query.name || req.body.name)
+    var options = {
+        method: 'POST',
+        uri: 'http://kil-sales-bssaip.trio-2.nec.talkdev.co.uk/sales-api/availability-check/set-package',
+        form: {
+            packageCode: packageCode
+        },
+        json: true
+    };
+
+    rp(options)
+    .then(function(response) {
+        var postCode = context.bindingData.postCode;
+
+        var options = {
+            method: 'POST',
+            uri: `http://kil-sales-bssaip.trio-2.nec.talkdev.co.uk/sales-api/availability-check/get-address?postCode=${postCode}`,
+            json: true
         };
-    }
-    else {
+        return rp(options);
+    })
+    .then(function(response) {
         context.res = {
-            status: 400,
-            body: "Please pass a name on the query string or in the request body"
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            status: 200, 
+            body: response.data
         };
-    }
+        context.done();
+    })
+    .catch(function(err) {
+        context.log('something went wrong');
+        context.log.error(err);
+        context.res = {status:500, body:err}
+        context.done();
+    }); 
 };
